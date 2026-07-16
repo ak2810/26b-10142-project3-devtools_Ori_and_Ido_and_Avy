@@ -1,0 +1,9 @@
+# Keep shell scripts and YAML with LF endings so they run on Linux even though
+# they were authored on Windows.
+*.sh   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# Treat the compressed backups as binary (no line-ending conversion).
+*.gz   binary
+*.zip  binary

@@ -1,0 +1,8 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# NOTE: the backup files under backups/ ARE committed on purpose
+# (the assignment requires the backups to be stored in the repository).

@@ -1,0 +1,44 @@
+# Optional docker-compose for convenience
+services:
+  db:
+    image: mysql:latest
+    container_name: drupal-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupalpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - drupal-db-data:/var/lib/mysql
+    networks:
+      - drupal-net
+    restart: unless-stopped
+
+  drupal:
+    image: drupal:latest
+    container_name: drupal-app
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-themes:/var/www/html/themes
+      - drupal-sites:/var/www/html/sites
+    networks:
+      - drupal-net
+    restart: unless-stopped
+
+networks:
+  drupal-net:
+    name: drupal-net
+
+volumes:
+  drupal-db-data:
+  drupal-modules:
+  drupal-profiles:
+  drupal-themes:
+  drupal-sites:
